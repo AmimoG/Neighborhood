@@ -48,7 +48,7 @@ def signup(request):
 
 @login_required(login_url='login')
 def profile(request, username):
-    return render(request, 'profile.html')
+    return render(request, 'neighbour/profile.html')
 
 def user_profile(request, username):
     user_prof = get_object_or_404(User, username=username)
@@ -77,7 +77,7 @@ def edit_profile(request, username):
         'user_form': uform,
         'prof_form': pform,
     }
-    return render(request, 'edit.html', params)
+    return render(request, 'neighbour/update_profile.html', params)
 
 
 def upload(request):
