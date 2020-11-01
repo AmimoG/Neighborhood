@@ -171,7 +171,6 @@ def project(request, post):
     }
     return render(request, 'project.html', params)
 
-
 def search_project(request):
     if request.method == 'GET':
         title = request.GET.get("title")
