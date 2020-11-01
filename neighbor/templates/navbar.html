@@ -1,80 +1,61 @@
-<!--Navbar-->
-<nav class="pl-5 pr-5 navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-
-    <!-- Navbar brand -->
-    <a class="navbar-brand font-weight-bold" href="{% url 'index' %}">City Life</a>
-  
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="basicExampleNav">
-  
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-          <li class="text-white nav-item">
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
-          </li>
-          
-        </li>
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link font-weight-bold" href="{%url 'new-post'%}"> ADD POST </a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          
-        </li> 
-        </ul>
-       
-      <!-- Links -->
-      
-      {% if user.is_authenticated %}
-          <form class="form-inline" action="{% url 'search_results' %}">
-            <div class="md-form my-1">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="keyword">
+{% load crispy_forms_tags %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
+    <div class="box-left" style="color: whitesmoke;">
+        <div class="item bt-menu js-nav-main" data-menu-id="menu-main">
+            <div class="ico-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
-            <!-- <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3 btn-sm" type="submit">Search</button> -->
-          </form>
-          {% endif %}
-          <div class="col-sm-6 col-lg-6 d-flex justify-content-end">
-              {% if user.is_authenticated %}
-              <ul>
-                <!-- <li class="nav-item">
-                  <a class="nav-link font-weight-bold text-white " href="{%url 'new-business'%}">ADD BUSINESS</a>
-                </li> -->
-                </ul>
-              <ul>
-                <li class="dropdown list-unstyled text-white">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i> My Account </a>
-                  <ul class="dropdown-menu dropdown-default" role="menu">
-                    <li>
-                        <a class="dropdown-item" href="{%url 'profile'%}">Profile</a>
-                      </li>
-                    <li>
-                      <a class="dropdown-item" href="/accounts/password/change">Change Password</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/logout">Logout</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-              {% else %}
-              <li class="list-unstyled">
-                  <a class='btn btn-sm btn-default font-weight-bold' href="/accounts/login">Login</a>
-                  <a class='btn btn-sm btn-default font-weight-bold' href="/accounts/register">Register</a>
-              </li>
-
-              {% endif %}
+            <span class="has-tablet">MENU</span>
         </div>
-
     </div>
-    <!-- Collapsible content -->
-  </nav>
-  <!--/Navbar-->
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}"> <strong class="mr-4 brand"> Awwards</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <form class="form-inline" method="get" action="{% url 'search' %}">
+                        {% csrf_token %}
+                        <div class="md-form my-0">
+                            <input class="form-control mr-sm-2 " type="text" placeholder="Search" name="title" aria-label="Search">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav navbar-right">
+                {% if user.is_authenticated%}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                                                                            src="{{ user.profile.profile_picture.url }}"
+                                                                            alt="">
+                    </a>
+                    <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        
+                        <hr>
+                        <a class="dropdown-item text-center" href="{% url 'profile' user.username  %}"> profile</a>
+                        <hr>
+                        <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
+
+
+                    </div>
+                </li>
+                {% else %}
+                <a href="{% url 'login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a>
+                {% endif %}
+                <div class="item has-tablet" id="bt-submit"><a href="{% url 'upload'%}" class="button"><span>SUBMIT YOUR PROJECT!</span></a></div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<button class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
+    Submit your site
+</button>
