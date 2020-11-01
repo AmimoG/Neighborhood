@@ -23,7 +23,7 @@ def index(request):
     #     print(posts)
     # except Project.DoesNotExist:
     #     posts = None
-    return render(request, 'award/index.html', {'form': form, 'posts':posts})
+    return render(request, 'neighbour/index.html', {'form': form, 'posts':posts})
 
 
 def signup(request):
@@ -105,7 +105,7 @@ def home(request):
         'all_images': project_images,
         'current_user': current_user,
     }
-    return render(request, "award/index.html", image_params)
+    return render(request, "neighbour/index.html", image_params)
 
 
 def rate(request):
@@ -184,7 +184,7 @@ def search_project(request):
         return render(request, '/award/search_results.html', params)
     else:
         message = "You haven't searched for any image category"
-    return render(request, 'award/search_results.html', {'message': message})
+    return render(request, 'neighbour/search_result.html', {'message': message})
 
 @login_required
 def upload(request):
