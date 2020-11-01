@@ -1,41 +1,45 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from .models import *
 from django.contrib.auth.models import User
-from .models import Post, Profile, Rating
-from pyuploadcare.dj.forms import ImageField
+from django.contrib.auth.forms import UserCreationForm
+from crispy_forms.helper import FormHelper
 
 
+class NewBusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['Admin', 'pub_date', 'admin_profile']
+        widgets = {
+          'address': forms.Textarea(attrs={'rows':1, 'cols':10,}),
+        }
+
+class NewNeighborhoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighborhood
+        exclude = ['Admin', 'pub_date', 'admin_profile']
+            
+
+class UpdateUserProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
+        widgets = {
+          'bio': forms.Textarea(attrs={'rows':2, 'cols':10,}),
+        }
+        
+        
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
-
-
+        
+        
 class PostForm(forms.ModelForm):
-    photo = ImageField(label='')
-
     class Meta:
         model = Post
-        fields = ('photo', 'title', 'url', 'description', 'technologies',)
-
-
-class UpdateUserForm(forms.ModelForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
-    class Meta:
-        model = User
-        fields = ('username', 'email')
-
-
-class UpdateUserProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['name', 'location', 'profile_picture', 'bio', 'contact']
-
-
-class RatingsForm(forms.ModelForm):
-    class Meta:
-        model = Rating
-        fields = ['design', 'usability', 'content']
+        exclude = ['Author', 'pub_date', 'author_profile', 'neighborhood']
+        widgets = {
+          'post': forms.Textarea(attrs={'rows':2, 'cols':10,}),
+        }

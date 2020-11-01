@@ -23,7 +23,7 @@
                        aria-expanded="false">{{ user.username|title }} 
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> profile</a>
+                        <a class="dropdown-item text-center" href="{% url 'profile' user.username  %}"> profile</a>
                         <hr>
                         <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
                         <hr>

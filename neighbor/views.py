@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from .serializers import ProfileSerializer, UserSerializer, PostSerializer
-from .forms import SignupForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RatingsForm
+from .forms import SignupForm, PostForm, UpdateUserProfileForm
 from django.http import HttpResponseRedirect
 from .forms import *
 
