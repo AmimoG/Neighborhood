@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'neighbor',
     'bootstrap3',
+    'bootstrap4',
     'crispy_forms',
     'rest_framework',
     'django_forms_bootstrap',
