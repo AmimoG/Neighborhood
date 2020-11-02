@@ -5,6 +5,10 @@
     background-color:black;
     color:black;
 }
+
+#intro{
+    background-image: url(../images/Background\ image\ main.jpeg);
+}
 .login, #site{
     text-decoration: none;
     color:white;
