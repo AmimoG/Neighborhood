@@ -1,7 +1,10 @@
 .hello{
     color:green;
 }
-
+#nbar{
+    background-color:rgb(56, 56, 56);
+    color:black;
+}
 
 #intro{
     background-image: url(../images/Background\ image\ main.jpeg);
@@ -9,6 +12,13 @@
 .login, #site{
     text-decoration: none;
     color:white;
+}
+
+.services{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .login:hover, #site:hover{
