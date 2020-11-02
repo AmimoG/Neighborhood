@@ -1,8 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from rest_framework import viewsets
-from .serializers import ProfileSerializer, UserSerializer, PostSerializer
 from .forms import SignupForm, PostForm, UpdateUserProfileForm, UpdateUserForm
 from django.http import HttpResponseRedirect
 from .forms import *
