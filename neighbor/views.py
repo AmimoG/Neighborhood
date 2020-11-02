@@ -46,13 +46,19 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-def profile(request):
-    Profile.objects.get_or_create(user=request.user)
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.profile)
+@login_required(login_url='login')
+def profile(request, username):
+    return render(request, 'neighbour/profile.html')
+
+def user_profile(request, username):
+    user_prof = get_object_or_404(User, username=username)
+    if request.user == user_prof:
+        return redirect('profile', username=request.user.username)
+    params = {
+        'user_prof': user_prof,
+    }
+    return render(request, 'userprofile.html', params)
+
 
 @login_required(login_url='login')
 def edit_profile(request, username):
@@ -90,7 +96,7 @@ def upload(request):
     except Project.DoesNotExist:
         posts = None
         return redirect('home')
-    return render(request, 'upload.html', {'posts': posts, 'form': form})
+    return render(request, 'neighbour/upload.html', {'posts': posts, 'form': form})
 
 
 def home(request):
