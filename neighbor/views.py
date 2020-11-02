@@ -95,7 +95,7 @@ def upload(request):
         print(posts)
     except Project.DoesNotExist:
         posts = None
-        return redirect('home')
+        return redirect('index')
     return render(request, 'neighbour/upload.html', {'posts': posts, 'form': form})
 
 
@@ -216,4 +216,4 @@ def upload(request):
     else:
         form=PostForm()
         
-    return render(request,'upload.html',{'form':form})
+    return render(request,'neighbour/upload.html',{'form':form})
