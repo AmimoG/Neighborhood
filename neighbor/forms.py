@@ -27,7 +27,13 @@ class UpdateUserProfileForm(forms.ModelForm):
           'bio': forms.Textarea(attrs={'rows':2, 'cols':10,}),
         }
         
-        
+class UpdateUserForm(forms.ModelForm):
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+          
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 

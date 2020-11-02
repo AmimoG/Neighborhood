@@ -35,12 +35,12 @@
                 {% else %}
                 <a href="{% url 'login' %}" class="login btn btn-sm btn-info"> REGISTER/LOGIN </a>
                 {% endif %}                
-                <div class="btn btn-info btn-sm" id="site"><a href="{% url 'upload'%}"></a>SUBMIT YOUR PROJECT</a>
-                </div>
-              
+                <!-- <div class="btn btn-info btn-sm" id="site"><a href="{% url 'upload'%}"></a>SUBMIT YOUR PROJECT</a>
+                </div> -->
+                <div class="item has-tablet" id="bt-submit"><a href="{% url 'upload'%}" class="btn-sm"><span>SUBMIT</span></a></div>
+
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- <div class="item has-tablet" id="bt-submit"><a href="{% url 'upload'%}" class="button"><span>SUBMIT YOUR PROJECT!</span></a></div> -->
