@@ -1,105 +1,8 @@
 {%extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
 {% block content %}
-{% if user.is_authenticated %}
 {{block.super}}
-<div class="container-fluid" style="height: 100%;">
-  <div class="row align-items-center" style="background-image: url();" >
-    <div class="col-lg-9 pr-1 pl-1">
-        <div class="container pt-2 mt-2">
-            <p class="font-weight-bold">My Neighbourhood</p>
-            
-          <form class="" action="{% url 'index' %}" method="get">
-
-            <!-- Grid row -->
-          <div class="row">
-              <!-- Grid column -->
-              <div class="col">
-                <!-- Default input -->
-                <select name="neighborhood" class="form-control  form-control-lg">
-                    {% for neighborhood in all_neighborhoods %}
-                    <option value="{{neighborhood.name}}">{{neighborhood.name}}</option>
-                    {% endfor %}
-                  </select>     
-              </div>
-              <!-- Grid column -->
-          
-              <!-- Grid column -->
-              <div class="col">
-                <!-- Default input -->
-                <button type = "submit" class="btn btn-outline-dark btn-md">Search Neighborhood</button>
-              </div>
-              <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-          </form>
-
-        </div>
-
-        <div class="container pt-4 mt-2 mb-4 pb-4">
-
-          {% if location %}
-              <!-- start of table  --> 
-            <div class="table-responsive">
-              <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                  <thead class="black white-text">
-                    <tr class="font-weight-bold">
-                      <th class="th-sm">Business Name
-                      </th>
-                      <th class="th-sm">Business Address
-                      </th>
-                      <th class="th-sm">Business Email
-                      </th>
-                      <th class="th-sm">Neighborhood
-                      </th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                      {% for biz in location%}
-                    <tr>
-                      <td>{{biz.name}}</td>
-                      <td>{{biz.address}}</td>
-                      <td>{{biz.email}}</td>
-                      <td>{{biz.neighborhood.name}}</td>
-                      
-                    </tr>
-              {% endfor %}                
-            </div>
-              <!-- end of table  -->
-
-              {% else %}
-              <p>Nothing found.</p>
-            
-          {% endif %}
-
-        </div>
-      </div>
-      
-      <!-- second column -->
-
-      <div class="col-lg-3 pt-2 mt-2 mb-4 pb-2">
-        {% if location %}
-        <div class="container ">
-            <h4>{{message}} Updates</h4>
-            <hr>
-            
-            <div class="pl-1 ml-1 pt-2">
-              {% for post in all_posts %}
-              <p>{{post.post}}</p>
-              <small>Posted by: {{post.Author}}</small> <br>
-              <small>Posted by: {{post.pub_date}}</small>
-
-              <hr>
-
-              {% endfor %}
-            {% endif %}
-            </div>
-        </div>
-      </div>
-
-    </div>
-</div>
-{% else %}
 
 <div id="intro" style="background-image: url(https://static2.mansionglobal.com/production/media/article-images/6059d3a0ccfe957b144e9514b08dd92b/large_large_E4C94DF6-7159-48FB-AA50-C25595AD2D39.jpeg);" >
       
@@ -111,8 +14,8 @@
 
                 <div class="col-lg-12 pt-5 mt-5">
 
-                    <!-- Heading -->
-                    <h3 class="white-text pt-5">A Good Neighborhood <br> brings home issues that affect us all</h3>
+                    
+                    <h3 class="white-text pt-5" style="color: whitesmoke;" >A Good Neighborhood <br> brings home issues that affect us all</h3>
 
                                     
                 </div>
@@ -125,7 +28,95 @@
 
 </div>
 
+<div class="jumbotron">    
+    <div class="">
+        <h2 class="display-5 text-center font-weight-bold text-uppercase"> City Life</h2>
+        <p class="text-center font-weight-bold text-uppercase">A Good Neighborhood brings home issues that affect us all</p>
+    </div>
+    <div class="col-12">
+        <div class="row services" >
+        <div class="card" style="width: 18rem;">
+            <img src="https://i2.wp.com/www.reactorreview.com/wp-content/uploads/2019/07/Police-Stations-in-Kenya.png?fit=788%2C444&ssl=1" class="card-img-top" alt="...">
+            <div class="card-body">
+            <p class="card-text">
+                Phone: 254-020-3341411 <br>
+                <a href="info@kenyapolice.go.ke">Email: info@kenyapolice.go.ke</a> <br>                
+                <a href="http://www.kenyapolice.go.ke">website</a>
+                <br>
+                police Station
+            </p>
+            </div>
+        </div>
+        <br>
+        <div class="card" style="width: 18rem;">
+            <img src="https://pbs.twimg.com/media/Ehi0X7ZWkAANaQ4.jpg:large" class="card-img-top" alt="...">
+            <div class="card-body">
+            <p class="card-text">
+                Phone: 0795 340216 or 0794 589843 <br>
+                <a href="info@kenyapolice.go.ke">Email: info@kutrrh.go.ke</a> <br>                
+                <a href="https://kutrrh.go.ke/">website</a>
+                <br>
+                Hospitals
+            </p>
+            </div>
+        </div>
+        <br>
+        <div class="card" style="width: 18rem;">
+            <img src="https://www.wantedinafrica.com/i/featured/storage/uploads/2019/09/Brookhouse_International_School.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+            <p class="card-text">
+                Phone: +254724-255444 or +254736-256173 <br>
+                <a href="info@kenyapolice.go.ke">Email: admin@hillcrest.ac.ke</a> <br>                
+                <a href="https://www.hillcrest.ac.ke/">website</a>
+                <br>
+                Schools
+            </p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/0b/4d/6e/7a/nairobi-s-premier-shopping.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+            <p class="card-text">
+                Phone:  0710-483-010 <br>
+                <a href="info@kenyapolice.go.ke">Email: info@thejunction.co.ke</a> <br>                
+                <a href="https://thejunction.co.ke/">website</a>
+                <br>
+                Shopping Mall
+            </p>
+            </div>
+        </div>    
+        </div>  
+      
+
+    </div>
+</div>
+    
+{% if user.is_authenticated %}
+
+
 {% endif %}
 <!-- end of landing layout -->
+<div class="class">
+    <p>
+        My Neighborhood
+    </p>
+</div>
+{% for post in posts %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3" >
+            <div class="card" style="width: 18rem;">
+                <img src="https://prpmedia.harstatic.com/8625721/hr/img-1.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p>
+                        {{post.title}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>            
+    
+{% endfor %}
 
 {% endblock %}

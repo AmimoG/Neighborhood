@@ -45,7 +45,7 @@ class SignupForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ['Author', 'pub_date', 'author_profile', 'neighborhood']
+        exclude = [ 'user', 'url', 'image', 'Author', 'pub_date', 'author_profile', 'neighborhood']
         widgets = {
           'post': forms.Textarea(attrs={'rows':2, 'cols':10,}),
         }

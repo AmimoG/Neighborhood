@@ -2,11 +2,11 @@
 {% load bootstrap4 %} 
 {% load static %}
 {% block content%}
-<div class="container mt-3 mb-5">
+<div class="container mt-3 mb-5" style="background-image: url(https://happilyannmarie.com/wp-content/uploads/2017/10/Photo-Oct-11-11-32-22-AM-1024x683.jpg);" >
     <div class="row">
         <div class="col-lg-2 col-md-2 col-xs-0"></div>
         <div class="col-lg-8 col-md-8">
-            <legend class="text-center border ">Create Your Project For Display</legend>
+            <legend class="text-center border ">Make a neighbourhood post</legend>
             <form  action="{% url 'upload'%}" method="post" enctype="multipart/form-data">
                 {%csrf_token%}
 

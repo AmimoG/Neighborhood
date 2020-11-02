@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
-        
+    {% if user.is_authenticated %}
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}"> <strong class="mr-4 brand"> City Life</strong></a>        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -14,18 +14,18 @@
                     </form>
                 </li>
             </ul>
-
+            
             <ul class="navbar-nav navbar-right">
                 {% if user.is_authenticated%}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" style="color:white; font-weight: bolder;"
                        aria-haspopup="true"
                        aria-expanded="false">{{ user.username|title }} 
                     </a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item text-center" href="{% url 'profile' user.username  %}"> profile</a>
+                        <a class="dropdown-item text-center" href="{% url 'profile'%}"> profile</a>
                         <hr>
-                        <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
+                        <a class="dropdown-item text-center" href="{% url 'edit_profile' user.username %}"> Edit profile</a>
                         <hr>
                         <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
 
@@ -45,5 +45,6 @@
             </ul>
         </div>
     </div>
+    {% endif %}  
 </nav>
 

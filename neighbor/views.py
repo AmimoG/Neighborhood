@@ -7,24 +7,19 @@ from .forms import SignupForm, PostForm, UpdateUserProfileForm, UpdateUserForm
 from django.http import HttpResponseRedirect
 from .forms import *
 
-
+@login_required(login_url='login')
 def index(request):
-    posts=Post.objects.all()
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.save()
-    else:
-        form = PostForm()
+    current_user = request.user
+    try:
+        profile = Profile.objects.get(user = current_user)
+    except:
+        return redirect('edit_profile',username = current_user.username)
 
-    # try:
-    #     posts = Post.objects.all()
-    #     print(posts)
-    # except Project.DoesNotExist:
-    #     posts = None
-    return render(request, 'neighbour/index.html', {'form': form, 'posts':posts})
+    try:
+        posts = Post.objects.filter(neighborhood = profile.neighborhood)
+    except:
+        posts = None
+    return render(request, 'neighbour/index.html', {'posts':posts, 'profile':profile})
 
 
 def signup(request):
@@ -37,7 +32,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            return redirect('index')
     else:
         form = SignupForm()
         register_form = {
@@ -47,7 +42,7 @@ def signup(request):
 
 
 @login_required(login_url='login')
-def profile(request, username):
+def profile(request):
     return render(request, 'neighbour/profile.html')
 
 def user_profile(request, username):
@@ -62,69 +57,56 @@ def user_profile(request, username):
 
 @login_required(login_url='login')
 def edit_profile(request, username):
-    user = User.objects.get(username=username)
+    current_user = request.user
     if request.method == 'POST':
-        user_form = UpdateUserForm(request.POST, instance=request.user)
-        prof_form = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if user_form.is_valid() and prof_form.is_valid():
-            user_form.save()
-            prof_form.save()
-            return redirect('profile', user.username)
+        try:
+            profile = Profile.objects.get(user=current_user)
+            form = UpdateUserProfileForm(request.POST,instance=profile)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = current_user
+                profile.save()
+            return redirect('index')
+        except:
+            form = UpdateUserProfileForm(request.POST)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = current_user
+                profile.save()
+            return redirect('index')
     else:
-        uform = UpdateUserForm(instance=request.user)
-        pform = UpdateUserProfileForm(instance=request.user.profile)
-    params = {
-        'user_form': uform,
-        'prof_form': pform,
-    }
-    return render(request, 'neighbour/update_profile.html', params)
+        if Profile.objects.filter(user=current_user):
+            profile = Profile.objects.get(user=current_user)
+            form = UpdateUserProfileForm(instance=profile)
+        else:
+            form = UpdateUserProfileForm()
+    return render(request, 'neighbour/update_profile.html', {'form': form} )
 
-
+@login_required(login_url='login')
 def upload(request):
+    current_user = request.user
+    try:
+        profile = Profile.objects.get(user = current_user)
+    except:
+        return redirect('edit_profile',username = current_user.username)
+
+    try:
+        posts = Post.objects.filter(neighborhood = profile.neighborhood)
+    except:
+        posts = None
+
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
+            post.user=current_user
+            post.neighborhood = profile.neighborhood
             post.save()
+        return redirect('index')
     else:
         form = PostForm()
-
-    try:
-        posts = Project.objects.all()
-        print(posts)
-    except Project.DoesNotExist:
-        posts = None
-        return redirect('index')
+   
     return render(request, 'neighbour/upload.html', {'posts': posts, 'form': form})
-
-
-def home(request):
-    current_user = request.user
-    project_images = Project.fetch_all_images()
-    image_params = {
-        'all_images': project_images,
-        'current_user': current_user,
-    }
-    return render(request, "neighbour/index.html", image_params)
-
-
-def rate(request):
-    ratings = Rate.objects.all()
-    rate_params = {
-        'ratings': ratings
-    }
-
-    return render('project.html', rate_params)
-
-
-def profile(request):
-    profile = Profile.get_profile_data()
-    profile_data = {
-        'profile': profile
-    }
-
-    return render('userprofile.html', profile_data)
 
 
 @login_required(login_url='login')
@@ -201,19 +183,3 @@ def search_project(request):
     else:
         message = "You haven't searched for any image category"
     return render(request, 'neighbour/search_result.html', {'message': message})
-
-@login_required
-def upload(request):
-    current_user=request.user
-    if request.method=='POST':
-        form=PostForm(request.POST,request.FILES)
-        if form.is_valid():
-            project=form.save(commit=False)
-            project.user=current_user
-            project.save()
-        return redirect('index')
-    
-    else:
-        form=PostForm()
-        
-    return render(request,'neighbour/upload.html',{'form':form})

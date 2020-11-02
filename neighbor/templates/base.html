@@ -1,131 +1,59 @@
 {% load static %}
-
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144351462-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-144351462-1');
 
-  {% if title %}
-  <title>City Life - {{title}}</title>
-  {% else %}
-    <title> City Life </title>
-  {% endif %}
- 
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nostalgia</title>
+    {% block styles %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite|Vollkorn|Yeseva+One&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock %}
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-  {% block styles %}
-    
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="/static/css/styles.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
 
-  {% endblock %}
-
+    </script>
 </head>
-
 <body>
+<div class="overlay">
+
+
     {% include "navbar.html" %}
-
-    {% block content %} 
-    <div class="jumbotron">    
-        <div class="">
-          <h2 class="display-5 text-center font-weight-bold text-white text-uppercase"> City Life</h2>
-          <p class="text-center font-weight-bold text-uppercase">A Good Neighborhood brings home issues that affect us all</p>
-        </div>
-
-        <div class="col-12">
-          <div class="row services" >
-            <div class="card" style="width: 18rem;">
-              <img src="https://i2.wp.com/www.reactorreview.com/wp-content/uploads/2019/07/Police-Stations-in-Kenya.png?fit=788%2C444&ssl=1" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">
-                  Phone: 254-020-3341411 <br>
-                  <a href="info@kenyapolice.go.ke">Email: info@kenyapolice.go.ke</a> <br>                
-                  <a href="http://www.kenyapolice.go.ke">website</a>
-                  <br>
-                  police Station
-                </p>
-              </div>
-            </div>
-            <br>
-            <div class="card" style="width: 18rem;">
-              <img src="https://pbs.twimg.com/media/Ehi0X7ZWkAANaQ4.jpg:large" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">
-                  Phone: 0795 340216 or 0794 589843 <br>
-                  <a href="info@kenyapolice.go.ke">Email: info@kutrrh.go.ke</a> <br>                
-                  <a href="https://kutrrh.go.ke/">website</a>
-                  <br>
-                  Hospitals
-                </p>
-              </div>
-            </div>
-            <br>
-            <div class="card" style="width: 18rem;">
-              <img src="https://www.wantedinafrica.com/i/featured/storage/uploads/2019/09/Brookhouse_International_School.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">
-                  Phone: +254724-255444 or +254736-256173 <br>
-                  <a href="info@kenyapolice.go.ke">Email: admin@hillcrest.ac.ke</a> <br>                
-                  <a href="https://www.hillcrest.ac.ke/">website</a>
-                  <br>
-                  Schools
-                </p>
-              </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-              <img src="https://media-cdn.tripadvisor.com/media/photo-s/0b/4d/6e/7a/nairobi-s-premier-shopping.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">
-                  Phone:  0710-483-010 <br>
-                  <a href="info@kenyapolice.go.ke">Email: info@thejunction.co.ke</a> <br>                
-                  <a href="https://thejunction.co.ke/">website</a>
-                  <br>
-                  Shopping Mall
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-    {%endblock%}
-
-
-    {% block scripts %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <!-- JQuery -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <!-- Bootstrap tooltips -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-      <!-- Bootstrap core JavaScript -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-      <!-- MDB core JavaScript -->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
-      <script type="text/javascript" src="{% static 'script.js' %}"></script>
+    {% block content %}
 
     {% endblock %}
 
-   <!-- Footer -->
-<footer class="page-footer font-small bg-dark mt-4 pt-4">
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 Copyright.
-      <a href="https://github.com/AmimoG/"> Amimo</a>
-    </div>
-    <!-- Copyright -->
-  
-  </footer>
-  <!-- Footer -->
-
+    {% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="{% static '/js/scripts.js'%}"></script>
+    {% endblock %}
+</div>
 </body>
-
 </html>
