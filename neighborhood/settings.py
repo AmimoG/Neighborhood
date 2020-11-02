@@ -73,6 +73,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'django_forms_bootstrap',
+    'django_static_jquery3',
+    'django_static_arrive',
+    'django_cascading_dropdown_widget',
 ]
 
 UPLOADCARE = {
