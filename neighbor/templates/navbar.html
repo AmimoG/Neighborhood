@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
         
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}"> <strong class="mr-4 brand"> City Life</strong></a>        
@@ -37,7 +37,10 @@
                 {% endif %}                
                 <!-- <div class="btn btn-info btn-sm" id="site"><a href="{% url 'upload'%}"></a>SUBMIT YOUR PROJECT</a>
                 </div> -->
+                {% if user.is_authenticated%}
                 <div class="item has-tablet" id="bt-submit"><a href="{% url 'upload'%}" class="submit btn btn-sm btn-info">SUBMIT</a></div>
+                          
+                {% endif %} 
 
             </ul>
         </div>
