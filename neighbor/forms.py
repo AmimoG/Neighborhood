@@ -5,14 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 from crispy_forms.helper import FormHelper
 
 
-class NewBusinessForm(forms.ModelForm):
-    class Meta:
-        model = Business
-        exclude = ['Admin', 'pub_date', 'admin_profile']
-        widgets = {
-          'address': forms.Textarea(attrs={'rows':1, 'cols':10,}),
-        }
-
 class NewNeighborhoodForm(forms.ModelForm):
     class Meta:
         model = Neighborhood

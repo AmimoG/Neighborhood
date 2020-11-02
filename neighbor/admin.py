@@ -7,7 +7,6 @@ from django import forms
 # Register your models here.
 
 
-admin.site.register(Business)
 admin.site.register(Neighborhood)
 admin.site.register(Profile)
 admin.site.register(Post)

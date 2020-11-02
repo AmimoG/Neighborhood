@@ -10,8 +10,7 @@ import datetime as dt
 class Neighborhood(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
-    occupants_count = models.IntegerField()
-    pub_date = models.DateTimeField(auto_now_add=True)
+    occupants_count = models.IntegerField()    
     Admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     
         
@@ -74,12 +73,9 @@ class Profile(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=155)
-    url = models.URLField(max_length=255)
-    description = models.TextField(max_length=255)
-    image = models.ImageField(upload_to='images')    
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
-    date = models.DateTimeField(auto_now_add=True, blank=True)
+    title = models.CharField(max_length=155)    
+    description = models.TextField(max_length=255)      
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")    
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -99,47 +95,4 @@ class Post(models.Model):
     def save_post(self):
         self.save()
 
-
-class Business(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
-    Admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    admin_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
-    address = models.TextField()
-    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE, blank=True, default='1')
-
-    
-    def save_business(self):
-        self.save()
-    
-    def delete_business(self):
-        self.delete()
-        
-    @classmethod
-    def get_allbusiness(cls):
-        business = cls.objects.all()
-        return business
-    
-    @classmethod
-    def search_business(cls, search_term):
-        business = cls.objects.filter(name__icontains=search_term)
-        return business
-    
-    @classmethod
-    def get_by_neighborhood(cls, neighborhoods):
-        business = cls.objects.filter(neighborhood__name__icontains=neighborhoods)
-        return business
-    
-    @classmethod
-    def get_businesses(request, id):
-        try:
-            business = Business.objects.get(pk = id)
-            
-        except ObjectDoesNotExist:
-            raise Http404()
-        
-        return business
-    
-    def __str__(self):
-        return self.name
     
