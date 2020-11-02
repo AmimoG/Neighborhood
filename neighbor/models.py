@@ -51,10 +51,6 @@ class Neighborhood(models.Model):
     def __str__(self):
         return self.name
     
-    class Meta:
-        ordering = ['-pub_date']
-        verbose_name = 'My Neighborhood'
-        verbose_name_plural = 'Neighborhoods'
 
 
 class Profile(models.Model):
@@ -108,7 +104,6 @@ class Post(models.Model):
 class Business(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
-    pub_date = models.DateTimeField(auto_now_add=True)
     Admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     admin_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
     address = models.TextField()
@@ -149,7 +144,3 @@ class Business(models.Model):
     def __str__(self):
         return self.name
     
-    class Meta:
-        ordering = ['-pub_date']
-        verbose_name = 'My Business'
-        verbose_name_plural = 'Business'
